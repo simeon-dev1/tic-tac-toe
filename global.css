@@ -80,3 +80,154 @@ button {
 	font-size: 10vw;
 }
 
+
+/* ((((((((((DEEPSEEK BOT START: "PLAYER DATA FORM STYLING"))))))))))
+/* Form container */
+#player-details {
+  background: #1e1e2f;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 2rem auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  border: 1px solid #33334e;
+}
+
+/* Fieldsets (player sections) */
+#player1-form, #player2-form {
+  border: 2px solid #4a4a6a;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background: #252537;
+}
+
+/* Legends */
+#player1-form legend, #player2-form legend {
+  background: #4a4a6a;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: 2px solid #6a6a8a;
+}
+
+/* Form groups */
+.name, .marker {
+  margin-bottom: 1rem;
+}
+
+/* Labels */
+.name label, .marker label {
+  display: inline-block;
+  width: 100px;
+  color: #b0b0d0;
+  font-weight: 500;
+}
+
+/* Input fields */
+.name input {
+  background: #1a1a2e;
+  border: 2px solid #3a3a5a;
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  width: calc(100% - 120px);
+  color: white;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.name input:focus {
+  outline: none;
+  border-color: #6a6aff;
+  box-shadow: 0 0 8px rgba(106, 106, 255, 0.3);
+}
+
+.name input::placeholder {
+  color: #4a4a6a;
+}
+
+/* Select dropdowns */
+.marker select {
+  background: #1a1a2e;
+  border: 2px solid #3a3a5a;
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  width: calc(100% - 120px);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236a6aff' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+}
+
+.marker select:focus {
+  outline: none;
+  border-color: #6a6aff;
+}
+
+/* PLAY button */
+#play-btn {
+  background: #6a6aff;
+  color: white;
+  border: none;
+  border-radius: 40px;
+  padding: 1rem 2rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.3s;
+  letter-spacing: 2px;
+  margin-top: 1rem;
+  border: 2px solid #8a8aff;
+}
+
+#play-btn:hover {
+  background: #5a5ae0;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(106, 106, 255, 0.3);
+}
+
+#play-btn:active {
+  transform: translateY(0);
+}
+
+/* Required field indicator */
+.name input:required {
+  border-left: 4px solid #6a6aff;
+}
+
+/* Validation styling */
+.name input:valid {
+  border-color: #4a9e4a;
+}
+
+.name input:invalid:not(:placeholder-shown) {
+  border-color: #e05a5a;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  #player-details {
+    padding: 1rem;
+  }
+  
+  .name label, .marker label {
+    width: 70px;
+  }
+  
+  .name input, .marker select {
+    width: calc(100% - 90px);
+  }
+  
+  #player1-form, #player2-form {
+    padding: 1rem;
+  }
+}
+
+/* (((((((((((((((DEEPSEEK DONE))))))))))))))) */
