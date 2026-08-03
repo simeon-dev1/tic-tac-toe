@@ -1,17 +1,17 @@
-// (Simeon Dev-1) GLOBAL PLAYERS CONSTRUCTOR
+# tic-tac-toe// (Simeon Dev-1) GLOBAL PLAYERS CONSTRUCTOR
 function Player(name, mark) {
 	return {
 		name,
 		mark,
 		score: 0,
-		win: function() {  // (Deepseek Bot) moved win method inside constructor
+		win: function() {
 			this.score++;
 		}
 	}
 }
 
 // (Simeon Dev-1) Initialize global players
-let player1 = Player(null, null);  // (Deepseek Bot) fixed typo: was 'lwt'
+let player1 = Player(null, null);
 let player2 = Player(null, null);
 
 // (Simeon Dev-1) Main Game Module
@@ -34,11 +34,14 @@ const Game = (function() {
 	const gameInfoDisplay = document.querySelector("#game-info-display");
 	const resetGameBtn = document.querySelector(".reset");
 
+	// (Simeon Dev-1) Turn tracking
+	let lastSelected = null;
+
 	// (Simeon Dev-1) FUNCTIONS
 	// (Simeon Dev-1) MAIN APP FUNCTION...
 	function launchApp() {
 		deployGameBoard();
-		for (let div of allDivs) {  // (Deepseek Bot) added 'let' declaration
+		for (let div of allDivs) {
 			div.classList.add("hide");
 		}
 		allDivs[0].classList.remove("hide");
@@ -49,7 +52,7 @@ const Game = (function() {
 	function deployGameBoard() {
 		const gameCard = document.createElement("div");
 		gameCard.setAttribute("id", "game-card");
-		for (let i = 0; i < 9; i++) {  // (Deepseek Bot) added 'let' declaration
+		for (let i = 0; i < 9; i++) {
 			const markCard = document.createElement("div");
 			markCard.classList.add("mark-card");
 			gameCard.appendChild(markCard);
@@ -69,7 +72,7 @@ const Game = (function() {
 
 	// (Simeon Dev-1) Process player data from form submission
 	function processPlayerDataForm(form) {
-		const formData = new FormData(form);  // (Deepseek Bot) added 'const' declaration
+		const formData = new FormData(form);
 
 		const p1Name = formData.get("player1Name"),
 			  p1Mark = formData.get("player1Mark"),
@@ -83,7 +86,7 @@ const Game = (function() {
 	function createPlayers(p1Name, p1Mark, p2Name, p2Mark) {
 		player1.name = p1Name;
 		player2.name = p2Name;
-		player1.mark = p1Mark;  // (Deepseek Bot) fixed: was setting both to p2Mark
+		player1.mark = p1Mark;
 		player2.mark = p2Mark;
 	}
 
@@ -93,28 +96,32 @@ const Game = (function() {
 		rootHeader.classList.add("hide");
 		gamePlayDiv.classList.remove("hide");
 		
-		updateGameDiv();  // (Deepseek Bot) removed parameters
-		activateResetBtn();  // (Deepseek Bot) removed parameters
-		activateCards();  // (Deepseek Bot) removed parameters
+		updateGameDiv();
+		activateResetBtn();
+		activateCards();
 	}
 
 	// (Simeon Dev-1) GAME PLAY FUNCTION DEPENDENCIES
 	// (Simeon Dev-1) Activate click handlers for game board cards
 	function activateCards() {
-		let lastSelected = `${player2.mark}`;
+		// Start with player 2's mark (so first click is player 1)
+		lastSelected = player2.mark;
 		const markCards = document.querySelectorAll(".mark-card");
-		for (let card of markCards) {  // (Deepseek Bot) added 'let' declaration
+		for (let card of markCards) {
 			card.addEventListener("click", (e) => {
-				// (Simeon Dev-1) Prevent overwriting existing marks
-				if (e.target.textContent !== '') return;  // (Deepseek Bot) added protection
+				// Prevent overwriting existing marks
+				if (e.target.textContent !== '') return;
 
-				e.target.innerText = lastSelected === "X" ? "O" :
-									lastSelected === "O" ? "X" :
-									"ERROR";
+				// Determine which mark to place
+				let markToPlace;
+				if (lastSelected === "X") markToPlace = "O";
+				else if (lastSelected === "O") markToPlace = "X";
+				else markToPlace = "ERROR"; // fallback
 
-				lastSelected = lastSelected === "X" ? "O" :
-							  lastSelected === "O" ? "X" :
-							  "ERROR";
+				e.target.innerText = markToPlace;
+
+				// Update lastSelected for next turn
+				lastSelected = markToPlace;
 
 				const result = checkMarkMatch();
 
@@ -129,11 +136,13 @@ const Game = (function() {
 					setTimeout(() => {
 						clearGameBoard();
 						updateGameDiv();
-					}, 1000);
+					}, 1500); // increased delay to show tie
 				}
 				else if (result === null) {
+					// No win or tie yet, continue
 				}
 				else {
+					// Should never happen
 				}
 			});
 		}
@@ -161,12 +170,12 @@ const Game = (function() {
 		else if (winner === player1) {
 			player1.win();
 			updateGameDiv();
-			setTimeout(clearGameBoard, 500);
+			setTimeout(clearGameBoard, 1500); // increased delay
 		}
 		else if (winner === player2) {
 			player2.win();
 			updateGameDiv();
-			setTimeout(clearGameBoard, 500);
+			setTimeout(clearGameBoard, 1500);
 		}
 	}
 	
@@ -189,7 +198,7 @@ const Game = (function() {
 	// (Simeon Dev-1) Clear all marks from game board
 	function clearGameBoard() {
 		const markCards = document.querySelectorAll('.mark-card');
-		for (let card of markCards) {  // (Deepseek Bot) added 'let' declaration
+		for (let card of markCards) {
 			card.textContent = "";
 		}
 	}
@@ -199,7 +208,9 @@ const Game = (function() {
 		player1.score = 0;
 		player2.score = 0;
 		clearGameBoard();
-		updateGameDiv();  // (Deepseek Bot) fixed: no arguments needed
+		// Reset turn order to player 2's mark (so first click is player 1)
+		lastSelected = player2.mark;
+		updateGameDiv();
 	}
 
 	// (Simeon Dev-1) Check if any winning pattern is matched
@@ -213,7 +224,7 @@ const Game = (function() {
 	    [0, 4, 8], [2, 4, 6]
 	  ];
 	  
-	  for (let pattern of winPatterns) {  // (Deepseek Bot) added 'let' declaration
+	  for (let pattern of winPatterns) {
 	    const [a, b, c] = pattern;
 	    const valA = squares[a].textContent;
 	    const valB = squares[b].textContent;
@@ -263,7 +274,7 @@ const Game = (function() {
 
 			e.target.reset();
 
-			launchGame();  // (Deepseek Bot) removed parameters
+			launchGame();
 		});
 	}
 
