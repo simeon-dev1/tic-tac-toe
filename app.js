@@ -132,10 +132,8 @@ const Game = (function() {
 					}, 1000);
 				}
 				else if (result === null) {
-					console.log(`Player with ${lastSelected} just made a move!`);
 				}
 				else {
-					console.log("ERROR - result");
 				}
 			});
 		}
