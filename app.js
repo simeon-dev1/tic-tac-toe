@@ -1,4 +1,4 @@
-# tic-tac-toe// (Simeon Dev-1) GLOBAL PLAYERS CONSTRUCTOR
+// (Simeon Dev-1) GLOBAL PLAYERS CONSTRUCTOR
 function Player(name, mark) {
 	return {
 		name,
