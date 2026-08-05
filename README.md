@@ -27,12 +27,12 @@ A classic two-player Tic-Tac-Toe game built with vanilla JavaScript.
 
 2. Open index.html in your browser (or use a local server like Live Server).
 
-Built With
+## Built With
 
 · HTML5
 · CSS3
 · Vanilla JavaScript (ES6+)
 
-License
+## License
 
 MIT
