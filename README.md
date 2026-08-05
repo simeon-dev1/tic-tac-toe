@@ -23,7 +23,7 @@ A classic two-player Tic-Tac-Toe game built with vanilla JavaScript.
    ```bash
    git clone git@github.com:simeon-dev1/tic-tac-toe.git
    cd tic-tac-toe
-```
+   ```
 
 2. Open index.html in your browser (or use a local server like Live Server).
 
